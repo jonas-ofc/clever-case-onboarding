@@ -1,7 +1,8 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { User, Errors } from "../interfaces/interfaces";
+import { useStore } from "vuex";
+import type { User, Errors } from "../interfaces/interfaces";
 import { fetchUsers } from "../services/userService";
 
 export default defineComponent({
@@ -9,6 +10,7 @@ export default defineComponent({
 
   setup() {
     const router = useRouter();
+    const store = useStore();
     const state = reactive({
       email: '' as string,
       password: '' as string,
@@ -38,11 +40,11 @@ export default defineComponent({
       if (validateForm()) {
         console.log('Validere'
         )
-        const user = state.users.find(user => user.email === state.email && user.password === state.password);
+        const user = state.users.find((user: User) => user.email === state.email && user.password === state.password);
         if (user) {
           router.push('/dashboard');
         } else {
-          state.errors.email = 'Invalid email or password';
+          state.errors.password = 'Den e-mail eller adgangskode du har indtastet, er ugyldig. Prøv igen.';
         }
       }
     };
@@ -100,14 +102,14 @@ export default defineComponent({
           <label for="email"></label>
           <input v-model="state.email" id="email" type="email" placeholder="Email*"
             class="w-full focus:outline-none p-4 border-solid border border-clever-green-60" />
-          <div v-if="state.errors.email" class="error">{{ errors.email }}</div>
+          <div v-if="state.errors.email" class="error">{{ state.errors.email }}</div>
         </div>
 
         <div class="form-group mb-4 ">
           <label for="password"></label>
           <input v-model="state.password" id="password" type="password" placeholder="Adgangskode*"
             class="w-full focus:outline-none p-4 border-solid border border-clever-green-60" />
-          <div v-if="state.errors.password" class="error">{{ errors.password }}</div>
+          <div v-if="state.errors.password" class="mt-2 text-xs text-red-600">{{ state.errors.password }}</div>
         </div>
 
         <button type="submit" class="bg-clever-green-100 w-fit mb-2 py-2 px-5 text-clever-white">Log ind</button>

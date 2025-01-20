@@ -1,5 +1,7 @@
-<script>
-
+<script lang="ts">
+export default {
+  name: "DashboardView",
+};
 
 </script>
 

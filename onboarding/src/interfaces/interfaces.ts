@@ -11,3 +11,7 @@ export interface User {
 export interface ApiUser {
     email: string;
 }
+
+export interface State {
+    isAuthenticated: boolean;
+  }
