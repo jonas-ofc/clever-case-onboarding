@@ -4,7 +4,7 @@
 </script>
 
 <template>
-<img alt="Vue logo" src="../assets/clever-user-dashboard.png" class="static-background" />
+<img alt="Vue logo" src="../assets/images/clever-user-dashboard.png" class="static-background" />
 
 </template>
 
