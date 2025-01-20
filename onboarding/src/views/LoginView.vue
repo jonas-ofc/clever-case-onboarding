@@ -1,37 +1,64 @@
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { User, Errors } from "../interfaces/interfaces";
+import { fetchUsers } from "../services/userService";
 
 export default defineComponent({
   name: "LoginView",
-  data() {
-    return {
-      email: '',
-      password: '',
+
+  setup() {
+    const router = useRouter();
+    const state = reactive({
+      email: '' as string,
+      password: '' as string,
       errors: {
         email: '',
         password: '',
-      },
+      } as Errors,
+      users: [] as User[],
+    });
+
+    const loadUsers = async () => {
+      state.users = await fetchUsers();
+    };
+
+    const validateForm = (): boolean => {
+      state.errors = { email: '', password: '' };
+      if (!state.email) {
+        state.errors.email = 'Ikke en gyldig email';
+      }
+      if (!state.password) {
+        state.errors.password = 'Mangler adgangskode';
+      }
+      return !state.errors.email && !state.errors.password;
+    };
+
+    const login = () => {
+      if (validateForm()) {
+        console.log('Validere'
+        )
+        const user = state.users.find(user => user.email === state.email && user.password === state.password);
+        if (user) {
+          router.push('/dashboard');
+        } else {
+          state.errors.email = 'Invalid email or password';
+        }
+      }
+    };
+
+    onMounted(() => {
+      loadUsers();
+    });
+
+    return {
+      state,
+      login,
+      email: state.email,
+      password: state.password,
+      errors: state.errors,
     };
   },
-  methods: {
-    validateForm() {
-      this.errors = { email: '', password: '' };
-      if (!this.email) {
-        this.errors.email = 'Ikke en gyldig email';
-      }
-      if (!this.password) {
-        this.errors.password = 'Mangler adgangskode';
-      }
-      return !this.errors.email && !this.errors.password;
-    },
-    login() {
-      if (this.validateForm()) {
-        const router = useRouter();
-        router.push('/dashboard');
-      }
-    }
-  }
 });
 </script>
 
@@ -71,16 +98,16 @@ export default defineComponent({
         </div>
         <div class="form-group mb-4 ">
           <label for="email"></label>
-          <input v-model="email" id="email" type="email" placeholder="Email*"
+          <input v-model="state.email" id="email" type="email" placeholder="Email*"
             class="w-full focus:outline-none p-4 border-solid border border-clever-green-60" />
-          <div v-if="errors.email" class="error">{{ errors.email }}</div>
+          <div v-if="state.errors.email" class="error">{{ errors.email }}</div>
         </div>
 
         <div class="form-group mb-4 ">
           <label for="password"></label>
-          <input v-model="password" id="password" type="password" placeholder="Adgangskode*"
+          <input v-model="state.password" id="password" type="password" placeholder="Adgangskode*"
             class="w-full focus:outline-none p-4 border-solid border border-clever-green-60" />
-          <div v-if="errors.password" class="error">{{ errors.password }}</div>
+          <div v-if="state.errors.password" class="error">{{ errors.password }}</div>
         </div>
 
         <button type="submit" class="bg-clever-green-100 w-fit mb-2 py-2 px-5 text-clever-white">Log ind</button>
@@ -91,8 +118,6 @@ export default defineComponent({
     <div class="w-1/2 h-full"><img alt="Clever charger" src="../assets/images/clever-charger.png" class="" /></div>
 
   </div>
-
-
 
 </template>
 
