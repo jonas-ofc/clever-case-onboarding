@@ -38,8 +38,6 @@ export default defineComponent({
 
     const login = () => {
       if (validateForm()) {
-        console.log('Validere'
-        )
         const user = state.users.find((user: User) => user.email === state.email && user.password === state.password);
         if (user) {
           router.push('/dashboard');

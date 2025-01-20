@@ -8,9 +8,24 @@ const routes = [
   { path: "/dashboard", name: "Dashboard", component: DashboardView, meta: {requiresAuth: true} },
 ];
 
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const isAuthenticated = store.state.isAuthenticated;
+    if (isAuthenticated) {
+      next(); 
+    } else {
+      next({ name: "Login" }); 
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;
