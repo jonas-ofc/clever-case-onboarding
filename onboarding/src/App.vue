@@ -1,12 +1,21 @@
-<script setup lang="ts">
-import Login from './components/Login.vue'
-import LandingPage from './components/LandingPage.vue'
+<script lang="ts">
+import LoginView from './views/LoginView.vue'
+import DashboardView from './views/DashboardView.vue'
+
+export default {
+  name: 'App',
+  components: {
+    DashboardView,
+    LoginView,
+    
+  }
+}
+
 </script>
 
 <template>
   <div class="App">
-  <LandingPage/>
-  <LoginView/>
+    <router-view />
   </div>
 </template>
 
@@ -17,7 +26,4 @@ import LandingPage from './components/LandingPage.vue'
   align-items: center;
   
 }
-
-
-
 </style>
