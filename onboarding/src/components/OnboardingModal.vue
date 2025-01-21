@@ -1,9 +1,9 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useOnboardingStore } from "../stores/onboarding";
-import StepOneSvg from "../assets/svg/step-one.svg";
-import StepTwoSvg from "../assets/svg/step-two.svg";
-import StepThreeSvg from "../assets/svg/step-three.svg";
+import StepOneSvg from "../assets/svgs/step-one.svg";
+import StepTwoSvg from "../assets/svgs/step-two.svg";
+import StepThreeSvg from "../assets/svgs/step-three.svg";
 
 export default defineComponent({
   name: "OnboardingModal",
