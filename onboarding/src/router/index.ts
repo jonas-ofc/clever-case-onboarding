@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import LoginView from "../views/LoginView.vue";
 import DashboardView from "../views/DashboardView.vue";
-import store from '../store';
+import { useUserStore } from "../stores/user";
+
 
 const routes = [
   { path: "/", name: "Login", component: LoginView },
@@ -15,13 +16,13 @@ const router = createRouter({
 });
 
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
+  const userStore = useUserStore(); 
   if (to.meta.requiresAuth) {
-    const isAuthenticated = store.state.isAuthenticated;
-    if (isAuthenticated) {
-      next(); 
+    if (userStore.isAuthenticated) {
+      next();
     } else {
-      next({ name: "Login" }); 
+      next({ name: "Login" });
     }
   } else {
     next();

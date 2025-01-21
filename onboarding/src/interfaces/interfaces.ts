@@ -14,4 +14,5 @@ export interface ApiUser {
 
 export interface State {
     isAuthenticated: boolean;
+    user: User | null;
   }

@@ -10,13 +10,14 @@ export async function fetchUsers(): Promise<User[]> {
         }));
 
         const betinnaExists = users.some(user => user.email === 'betinna.knudsen@virksomhed.dk');
+
         if (!betinnaExists) {
             users.push({
                 email: 'betinna.knudsen@virksomhed.dk',
                 password: 'password123'
             });
         }
-
+        
         return users;
 
     } catch (error) {

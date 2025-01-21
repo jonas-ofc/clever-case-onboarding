@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
+import { useUserStore } from '../stores/user'
 import type { User, Errors } from "../interfaces/interfaces";
 import { fetchUsers } from "../services/userService";
 
@@ -10,7 +10,6 @@ export default defineComponent({
 
   setup() {
     const router = useRouter();
-    const store = useStore();
     const state = reactive({
       email: '' as string,
       password: '' as string,
@@ -40,7 +39,9 @@ export default defineComponent({
       if (validateForm()) {
         const user = state.users.find((user: User) => user.email === state.email && user.password === state.password);
         if (user) {
-          router.push('/dashboard');
+          const userStore = useUserStore();
+          userStore.login(user); 
+          router.push("/dashboard"); 
         } else {
           state.errors.password = 'Den e-mail eller adgangskode du har indtastet, er ugyldig. Prøv igen.';
         }
