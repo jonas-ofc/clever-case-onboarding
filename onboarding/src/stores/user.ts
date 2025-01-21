@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import type { User } from '../interfaces/interfaces';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -15,9 +16,9 @@ export const useUserStore = defineStore('user', {
   getters: {
     isAuthenticated: (state) => !!state.user,
   },
-});
 
-export interface User {
-  email: string;
-  password: string;
-}
+  persist: {
+    key: 'user-store',
+    storage: sessionStorage, 
+  },
+});
