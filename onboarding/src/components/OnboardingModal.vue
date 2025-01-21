@@ -105,7 +105,7 @@ export default defineComponent({
           :class="
             store.currentStep === 0
               ? 'bg-clever-green-100'
-              : 'bg-clever-green-60'
+              : 'bg-clever-green-20'
           "
         ></div>
         <div
@@ -113,15 +113,15 @@ export default defineComponent({
           :class="
             store.currentStep === 1
               ? 'bg-clever-green-100'
-              : 'bg-clever-green-60'
+              : 'bg-clever-green-20'
           "
-        ></div>
+        ></div> 
         <div
           class="w-2 h-2 rounded-full mx-1"
           :class="
             store.currentStep === 2
               ? 'bg-clever-green-100'
-              : 'bg-clever-green-60'
+              : 'bg-clever-green-20'
           "
         ></div>
       </div>
