@@ -163,7 +163,7 @@ export default defineComponent({
 
         <div v-if="store.currentStep > 0" class="flex gap-2">
           <button
-            v-if="store.currentStep >= 1"
+            v-if="store.currentStep == 1"
             @click="store.previousStep"
             class="py-3 px-5 bg-clever-green-100 text-clever-white w-fit flex justify-center items-center gap-2 font-thin"
           >
