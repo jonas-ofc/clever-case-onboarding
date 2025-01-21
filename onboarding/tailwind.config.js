@@ -10,7 +10,8 @@ module.exports = {
       colors: {
         'clever-green-100': '#003732',
         'clever-green-60': '#668784',
-        'clever-white': '#ffffff',
+        'clever-green-10': '#E6EBEB',
+        'clever-white': '#ffffff', 
       },
     },
   },
