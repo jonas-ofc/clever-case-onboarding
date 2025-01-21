@@ -47,7 +47,7 @@ export default defineComponent({
         ];
 
         const handleSkip = () => {
-            store.setOnboardingSeen(false);
+            store.setOnboardingSeen(true);
         };
 
         const currentStep = computed(() => steps[store.currentStep]);
@@ -83,14 +83,14 @@ export default defineComponent({
             </div>
 
             <div
-                class="flex border-t border-b border-clever-green-10 py-8 items-center justify-center mb-4 px-12 gap-4">
+                class="flex border-t border-b border-clever-green-10 py-8 items-center justify-center mb-4 px-12 gap-12">
                 <!-- SVG -->
                 <component :is="currentStepSvg" class="w-fit" />
 
                 <div class="w-80">
                     <h2 class="text-lg font-thin mb-2">{{ currentStep.title }}</h2>
                     <p class=" font-thin mb-2">
-                        {{ currentStep.description }}.</p>
+                        {{ currentStep.description }}</p>
 
                     <ul class="text-s font-thin list-disc list-outside pl-4">
                         <li v-for="(bulletText, index) in currentStep.bullets" :key="index">{{ bulletText }}</li>
@@ -119,7 +119,7 @@ export default defineComponent({
                 </button>
 
                 <div v-if="store.currentStep > 0" class="flex gap-2 ">
-                    <button v-if="store.currentStep == 1" @click="store.previousStep"
+                    <button v-if="store.currentStep >= 1" @click="store.previousStep"
                         class="py-3 px-5 bg-clever-green-100 text-clever-white w-fit flex justify-center items-center gap-2 font-thin">
                         <svg class="scale-x-[-1]" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
