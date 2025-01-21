@@ -1,10 +1,10 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import { useOnboardingStore } from "../stores/onboarding";
-/* import StepOneSvg from "../assets/svg/step-one.svg";
-import StepTwoSvg from "../assets/svg/step-one.svg";
-import StepThreeSvg from "../assets/svg/step-one.svg";
- */
+import StepOneSvg from "../assets/svg/step-one.svg";
+import StepTwoSvg from "../assets/svg/step-two.svg";
+import StepThreeSvg from "../assets/svg/step-three.svg";
+
 
 export default defineComponent({
     name: "OnboardingModal",
@@ -52,14 +52,22 @@ export default defineComponent({
 
         const currentStep = computed(() => steps[store.currentStep]);
 
+        const currentStepSvg = computed(() => {
+            if (store.currentStep === 0) return StepOneSvg;
+            if (store.currentStep === 1) return StepTwoSvg;
+            if (store.currentStep === 2) return StepThreeSvg;
+            return null;
+        });
+
         return {
-            store, 
+            store,
             steps,
             handleSkip,
             currentStep,
+            currentStepSvg,
         };
     }
-    
+
 });
 </script>
 <template>
@@ -77,8 +85,8 @@ export default defineComponent({
             <div
                 class="flex border-t border-b border-clever-green-10 py-8 items-center justify-center mb-4 px-12 gap-4">
                 <!-- SVG -->
+                <component :is="currentStepSvg" class="w-fit" />
 
-                
                 <div class="w-80">
                     <h2 class="text-lg font-thin mb-2">{{ currentStep.title }}</h2>
                     <p class=" font-thin mb-2">
@@ -90,9 +98,12 @@ export default defineComponent({
                 </div>
             </div>
             <div class="w-full flex items-center justify-center mb-12">
-                <div class="w-2 h-2 rounded-full bg-clever-green-100 mx-1" :class="store.currentStep === 0 ? 'bg-clever-green-100' : 'bg-clever-green-10'"></div>
-                <div class="w-2 h-2 rounded-full bg-clever-green-100 mx-1":class="store.currentStep === 1 ? 'bg-clever-green-100' : 'bg-clever-green-10'"></div>
-                <div class="w-2 h-2 rounded-full bg-clever-green-100 mx-1" :class="store.currentStep === 2 ? 'bg-clever-green-100' : 'bg-clever-green-10'"> </div>
+                <div class="w-2 h-2 rounded-full bg-clever-green-100 mx-1"
+                    :class="store.currentStep === 0 ? 'bg-clever-green-100' : 'bg-clever-green-10'"></div>
+                <div class="w-2 h-2 rounded-full bg-clever-green-100 mx-1"
+                    :class="store.currentStep === 1 ? 'bg-clever-green-100' : 'bg-clever-green-10'"></div>
+                <div class="w-2 h-2 rounded-full bg-clever-green-100 mx-1"
+                    :class="store.currentStep === 2 ? 'bg-clever-green-100' : 'bg-clever-green-10'"> </div>
             </div>
 
             <div class="flex justify-between">
@@ -100,14 +111,15 @@ export default defineComponent({
                 <button v-if="store.currentStep == 0 || store.currentStep == 2" @click="store.nextStep"
                     class="py-3 px-5 bg-clever-green-100 text-clever-white w-fit flex justify-center items-center gap-2 font-thin ml-auto">
                     Kom igang
-                    <svg v-if="store.currentStep == 0" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg v-if="store.currentStep == 0" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.14997 12.15L20.85 12.15" stroke="white" stroke-miterlimit="10" />
                         <path d="M13.65 4.94997L20.85 12.15L13.65 19.35" stroke="white" stroke-miterlimit="10" />
                     </svg>
                 </button>
 
                 <div v-if="store.currentStep > 0" class="flex gap-2 ">
-                    <button v-if="store.currentStep == 1"
+                    <button v-if="store.currentStep == 1" @click="store.previousStep"
                         class="py-3 px-5 bg-clever-green-100 text-clever-white w-fit flex justify-center items-center gap-2 font-thin">
                         <svg class="scale-x-[-1]" width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
