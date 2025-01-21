@@ -1,10 +1,21 @@
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useOnboardingStore } from "../stores/onboarding";
 
 export default defineComponent({
     name: "OnboardingModal",
-});
+    setup() {
+        const store = useOnboardingStore();
 
+        const handleSkip = () => {
+            store.setOnboardingSeen(true);
+        };
+
+        return {
+            handleSkip,
+        };
+    }
+});
 </script>
 <template>
     <div class="onboarding-modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -90,11 +101,11 @@ export default defineComponent({
             </div>
 
             <div class="flex justify-between">
-                <button class="underline">Spring over</button>
+                <button class="underline" @click="handleSkip">Spring over</button>
                 <button
-                    class="py-3 px-5 bg-clever-green-100 text-clever-white w-fit flex justify-center items-center gap-2 font-thin">Kom
-                    igang <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    class="py-3 px-5 bg-clever-green-100 text-clever-white w-fit flex justify-center items-center gap-2 font-thin">
+                    Kom igang
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.14997 12.15L20.85 12.15" stroke="white" stroke-miterlimit="10" />
                         <path d="M13.65 4.94997L20.85 12.15L13.65 19.35" stroke="white" stroke-miterlimit="10" />
                     </svg>

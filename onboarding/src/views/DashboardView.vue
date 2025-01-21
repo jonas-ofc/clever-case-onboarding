@@ -1,5 +1,6 @@
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import { useOnboardingStore } from "../stores/onboarding";
 import OnboardingModal from "../components/OnboardingModal.vue";
 
 export default defineComponent({
@@ -8,25 +9,21 @@ export default defineComponent({
     OnboardingModal,
   },
   setup() {
-    const showModal = ref(true);
+    const store = useOnboardingStore();
     return {
-      showModal,
+      store,
     };
   },
 });
 </script>
 
 <template>
-
-<img alt="Dashboard" src="../assets/images/clever-user-dashboard.png" class="static-background" />
-
-<OnboardingModal v-if="showModal" />
-
+  <img alt="Dashboard" src="../assets/images/clever-user-dashboard.png" class="static-background" />
+  <OnboardingModal v-if="!store.onboardingSeen" />
 </template>
 
 <style scoped>
 .static-background {
   width: 100vw;
-  
 }
 </style>
