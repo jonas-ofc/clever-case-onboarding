@@ -4,6 +4,7 @@ export const useOnboardingStore = defineStore("onboarding", {
   state: () => ({
     onboardingSeen: false,
     currentStep: 0,
+    steps: {},
   }),
   actions: {
     setOnboardingSeen(seen: boolean) {
@@ -22,5 +23,5 @@ export const useOnboardingStore = defineStore("onboarding", {
       }
     },
   },
-  persist: true
+  persist: true,
 });

@@ -1,52 +1,28 @@
 <script lang="ts">
-import { defineComponent, computed } from "vue";
+import { defineComponent, computed, reactive, onMounted } from "vue";
 import { useOnboardingStore } from "../stores/onboarding";
 import StepOneSvg from "../assets/svgs/step-one.svg";
 import StepTwoSvg from "../assets/svgs/step-two.svg";
 import StepThreeSvg from "../assets/svgs/step-three.svg";
+import { fetchSteps } from "@/services/stepsService";
+import type { Step } from "@/interfaces/interfaces";
 
 export default defineComponent({
   name: "OnboardingModal",
   setup() {
     const store = useOnboardingStore();
-    const steps = [
-      {
-        title: "Bedre brugeroplevelse",
-        description:
-          "Find hurtigt og nemt vej, til det du har brug for i selvbetjeningen.",
-        bullets: [
-          "Mød et opdateret design, der understøtter funktioner",
-          "Find nemt rundt med færre menupunkter",
-          "Naviger hurtigere med simpelt overblik",
-        ],
-      },
-      {
-        title: "Bedre kundeoverblik",
-        description:
-          "Det er blevet endnu nemmere at håndtere forskellige kunder med forskellige abonnementer og ladeadfærd.",
-        bullets: [
-          "Få det fulde overblik over jeres kunder",
-          "Dyk ned i detaljer om kundernes abonnementer, ladeadfærd og forbrug",
-          "Bestil og opsig abonnementer og ladebrikker",
-        ],
-      },
-      {
-        title: "Bedre bestillingsflow",
-        description:
-          "Det skal være nemt at bestille abonnementer i selvbetjeningen. Derfor har vi forbedret funktionerne i i bestillingsflowet.",
-        bullets: [
-          "Bliv guidet til det rette produkt",
-          "Følg med i bestillingen med tydelig status på processen",
-          "Modtag en kvitteringsmail i indbakken",
-        ],
-      },
-    ];
+
+    const data = reactive({
+      steps: [] as Step[],
+    });
 
     const handleSkip = () => {
       store.setOnboardingSeen(true);
     };
 
-    const currentStep = computed(() => steps[store.currentStep]);
+    const currentStep = computed((): Step => {
+      return data.steps[store.currentStep];
+    });
 
     const currentStepSvg = computed(() => {
       if (store.currentStep === 0) return StepOneSvg;
@@ -55,9 +31,12 @@ export default defineComponent({
       return null;
     });
 
+    onMounted(async () => {
+      data.steps = await fetchSteps();
+    });
+
     return {
       store,
-      steps,
       handleSkip,
       currentStep,
       currentStepSvg,
@@ -87,13 +66,16 @@ export default defineComponent({
         <component :is="currentStepSvg" class="w-fit" />
 
         <div class="w-80">
-          <h2 class="text-lg font-thin mb-2">{{ currentStep.title }}</h2>
+          <h2 class="text-lg font-thin mb-2">{{ currentStep?.title }}</h2>
           <p class="font-thin mb-2">
-            {{ currentStep.description }}
+            {{ currentStep?.description }}
           </p>
 
           <ul class="text-s font-thin list-disc list-outside pl-4">
-            <li v-for="(bulletText, index) in currentStep.bullets" :key="index">
+            <li
+              v-for="(bulletText, index) in currentStep?.bullets"
+              :key="index"
+            >
               {{ bulletText }}
             </li>
           </ul>
@@ -115,7 +97,7 @@ export default defineComponent({
               ? 'bg-clever-green-100'
               : 'bg-clever-green-20'
           "
-        ></div> 
+        ></div>
         <div
           class="w-2 h-2 rounded-full mx-1"
           :class="

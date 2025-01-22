@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: 'App',
-}
+  name: "App",
+};
 </script>
 
 <template>
@@ -10,6 +10,4 @@ export default {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

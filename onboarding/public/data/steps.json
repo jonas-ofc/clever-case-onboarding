@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Bedre brugeroplevelse",
+    "description": "Find hurtigt og nemt vej, til det du har brug for i selvbetjeningen.",
+    "bullets": [
+      "Mød et opdateret design, der understøtter funktioner",
+      "Find nemt rundt med færre menupunkter",
+      "Naviger hurtigere med simpelt overblik"
+    ]
+  },
+  {
+    "title": "Bedre kundeoverblik",
+    "description": "Det er blevet endnu nemmere at håndtere forskellige kunder med forskellige abonnementer og ladeadfærd.",
+    "bullets": [
+      "Få det fulde overblik over jeres kunder",
+      "Dyk ned i detaljer om kundernes abonnementer, ladeadfærd og forbrug",
+      "Bestil og opsig abonnementer og ladebrikker"
+    ]
+  },
+  {
+    "title": "Bedre bestillingsflow",
+    "description": "Det skal være nemt at bestille abonnementer i selvbetjeningen. Derfor har vi forbedret funktionerne i i bestillingsflowet.",
+    "bullets": [
+      "Bliv guidet til det rette produkt",
+      "Følg med i bestillingen med tydelig status på processen",
+      "Modtag en kvitteringsmail i indbakken"
+    ]
+  }
+]
