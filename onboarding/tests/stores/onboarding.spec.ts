@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
-import { useOnboardingStore } from '../../stores/onboarding';
+import { useOnboardingStore } from '../../src/stores/onboarding';
 
 describe('Onboarding Store', () => {
     beforeEach(() => {
