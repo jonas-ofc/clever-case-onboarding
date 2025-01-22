@@ -1,56 +1,51 @@
-# clever-case-onboarding
+# Clever Case Onboarding
 
-Clever Case Onboarding
-
-Beskrivelse
-
+## Beskrivelse
 Dette projekt er en onboarding-applikation udviklet som en del af en case study. Applikationen er bygget i Vue 3 ved brug af Pinia til state management, Tailwind CSS til styling, TypeScript til statisk typning og Vitest til test. Projektet inkluderer en onboarding-modal med tre trin, som guider brugeren gennem nye funktioner i platformen.
 
-Installation
-
+## Installation
 Følg disse trin for at komme i gang med projektet lokalt:
 
-Klon repository:
+1. Klon repository:
+   ```bash
+   git clone https://github.com/jonas-ofc/clever-case-onboarding
+   cd clever-case-onboarding
+   cd onboarding
+   ```
 
-git clone https://github.com/jonas-ofc/clever-case-onboarding
-cd clever-case-onboarding
-cd onboarding
+2. Installer afhængigheder:
+   ```bash
+   npm install
+   ```
 
-Installer afhængigheder:
+3. Start udviklingsserveren:
+   ```bash
+   npm run dev
+   ```
 
-npm install
+4. Byg projektet til produktion:
+   ```bash
+   npm run build
+   ```
 
-Start udviklingsserveren:
+5. Kør tests:
+   ```bash
+   npm run test
+   ```
 
-npm run dev
+## Teknologier
+- **Vue 3**: Frontend framework.
+- **Pinia**: Moderne state management.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **TypeScript**: Statisk typning for bedre udvikleroplevelse.
+- **Vitest**: Testing framework.
+- **Vite**: Bygger og serverer applikationen.
 
-Byg projektet til produktion:
-
-npm run build
-
-Kør tests:
-
-npm run test
-
-Teknologier
-
-Vue 3: Frontend framework.
-
-Pinia: Moderne state management.
-
-Tailwind CSS: Utility-first CSS framework.
-
-TypeScript: Statisk typning for bedre udvikleroplevelse.
-
-Vitest: Testing framework.
-
-Vite: Bygger og serverer applikationen.
-
-Projektstruktur
-
+## Projektstruktur
 Projektet følger en simpel mappestruktur:
 
-clever-case-onboarding/
+```
+onboarding/
 |-- src/
 |   |-- assets/           # Billeder og SVG'er
 |   |-- components/       # Genanvendelige Vue-komponenter
@@ -64,76 +59,30 @@ clever-case-onboarding/
 |-- public/               # Offentligt tilgængelige filer
 |-- package.json          # Projektets afhængigheder og scripts
 |-- README.md             # Dokumentation
+```
 
-Funktioner
+## Funktioner
+- **Onboarding Modal**:
+  - Tre trin med unikke overskrifter, beskrivelser og bullet points.
+  - Navigation mellem trin via knapper som "Næste" og "Forrige".
+  - Mulighed for at springe onboarding over med "Spring over".
+- **Login Funktion**:
+  - Bruger kan logge ind med e-mail og adgangskode.
 
-Onboarding Modal:
+- **Persistent Data**:
+  - Brugerens onboarding-status gemmes i `localStorage` ved hjælp af Pinia-plugin.
+  - Login-status gemmes i `sessionStorage` for vedvarende session.
 
-Tre trin med unikke overskrifter, beskrivelser og bullet points.
+## Scripts
+- `npm run dev`: Starter udviklingsserveren.
+- `npm run build`: Bygger applikationen til produktion.
+- `npm run test`: Kører tests med Vitest.
 
-Navigation mellem trin via knapper som "Næste" og "Forrige".
-
-Mulighed for at springe onboarding over med "Spring over".
-
-Persistent Data:
-
-Brugerens onboarding-status gemmes i sessionStorage ved hjælp af Pinia-plugin.
-
-Scripts
-
-npm run dev: Starter udviklingsserveren.
-
-npm run build: Bygger applikationen til produktion.
-
-npm run test: Kører tests med Vitest.
-
-Tests
-
+## Tests
 Tests er skrevet ved hjælp af Vitest og dækker:
+- Pinia stores (fx onboarding state og actions).
+- Komponentlogik (fx navigation mellem steps i onboarding-modal).
+- DOM-validering (fx korrekt visning af trin).
 
-Pinia stores (fx onboarding state og actions).
-
-Komponentlogik (fx navigation mellem steps i onboarding-modal).
-
-DOM-validering (fx korrekt visning af trin).
-
-Eksempel på test:
-
-import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
-import OnboardingModal from '@/components/OnboardingModal.vue';
-
-describe('OnboardingModal', () => {
-  it('renders first step correctly', () => {
-    const wrapper = mount(OnboardingModal);
-    expect(wrapper.text()).toContain('Bedre brugeroplevelse');
-  });
-});
-
-Styling
-
+## Styling
 Styling er implementeret med Tailwind CSS, som giver et hurtigt og fleksibelt designworkflow.
-
-Eksempel på styling:
-
-<div class="w-4 h-4 rounded-full bg-clever-green-100 mx-2"></div>
-
-Bidrag
-
-Hvis du ønsker at bidrage:
-
-Fork repository.
-
-Opret en ny branch for din feature:
-
-git checkout -b feature/your-feature
-
-Commit dine ændringer:
-
-git commit -m "Add your feature"
-
-Push din branch:
-
-git push origin feature/your-feature
-
-Opret en pull request.
