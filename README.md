@@ -79,10 +79,7 @@ onboarding/
 - `npm run test`: Kører tests med Vitest.
 
 ## Tests
-Tests er skrevet ved hjælp af Vitest og dækker:
-- Pinia stores (fx onboarding state og actions).
-- Komponentlogik (fx navigation mellem steps i onboarding-modal).
-- DOM-validering (fx korrekt visning af trin).
+Tests er skrevet ved hjælp af Vitest
 
 ## Styling
 Styling er implementeret med Tailwind CSS, som giver et hurtigt og fleksibelt designworkflow.
